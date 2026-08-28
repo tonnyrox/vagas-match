@@ -217,7 +217,7 @@ extensao_trabalho_google/
 
 ---
 
-## 10. Licença MIT e Ambiente Virtual (GitHub CLI local)
+## 10. Licença MIT e Proteção de Dados
 
 ### 10.1 Licença e repositório público
 O projeto é **MIT** (arquivo `LICENSE`): qualquer pessoa pode usar, copiar,
@@ -238,38 +238,7 @@ Repositório público: **https://github.com/tonnyrox/vagas-match**
    real não vai no repo, por privacidade).
 3. Recarregue a extensão ao editar `content.js`/`config.js`.
 
-### 10.2 Ambiente virtual + `gh` (sem instalar nada no sistema)
-Tudo fica local, na pasta do projeto:
-
-```bat
-REM criar venv (uma vez)
-python -m venv .venv
-
-REM GitHub CLI jaesta em .venv\gh\bin\gh.exe (baixado via zen_core/launcher)
-.\.venv\gh\bin\gh.exe --version
-```
-
-**Autenticar (device-code, funciona sem TTY interativo):** o `gh` imprime um
-código e uma URL; abra a URL no navegador (já logado) e digite o código.
-
-```bat
-REM gera o codigo e fica "polindo" o token
-echo. | .\.venv\gh\bin\gh.exe auth login --hostname github.com -p https
-REM copie o "one-time code" ex.: 79F2-FE44 e aprove em https://github.com/login/device
-```
-
-> Dica de automação (usada neste projeto): com o navegador do zendriver já
-> logado, um script pequeno (`auth_device.py`) navega até `github.com/login/device`,
-> preenche o código e clica **Autorizar** — mas o login/senha/2FA é sempre seu.
-
-**Verificar auth e operar:**
-```bat
-.\.venv\gh\bin\gh.exe auth status
-.\.venv\gh\bin\gh.exe repo edit DONO/REPO --visibility private --accept-visibility-change-consequences
-.\.venv\gh\bin\gh.exe repo view DONO/REPO --json name,visibility,isPrivate
-```
-
-### 10.3 Proteção de dados pessoais
+### 10.2 Proteção de dados pessoais
 `config.js` (seu perfil real) e `curriculo-preferencias-antonio-gomes.md` estão
 no `.gitignore`. Para compartilhar o projeto sem vazar dados, envie apenas:
 `manifest.json`, `content.js`, `content.css`, `background.js`, `popup.*`,
