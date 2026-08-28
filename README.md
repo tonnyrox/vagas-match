@@ -2,7 +2,7 @@
 
 > Extensão que mostra em **tempo real** o match entre seu currículo e vagas de
 > emprego (LinkedIn, Indeed, Jobbol). Analisa a vaga e indica se vale aplicar.
-> Versão do manifest: **1.8.0** · Autor: Antônio Gomes do Carmo.
+> Versão do manifest: **1.8.0** · Autor: tonnyrox.
 
 ---
 
@@ -182,12 +182,11 @@ extensao_trabalho_google/
 ├── diagnostico_extensao.py  # script de verificação/depuração
 ├── LICENSE                  # MIT (veja seção 10)
 ├── .gitignore               # protege config.js e dados pessoais
-├── curriculo-preferencias-antonio-gomes.md  # fonte do perfil (gitignored)
 ├── README.md                # este arquivo (documentação única)
 └── .venv/                   # ambiente virtual Python + gh (gitignored)
 ```
 
-> **Dados pessoais:** `config.js` e `curriculo-preferencias-antonio-gomes.md`
+> **Dados pessoais:** `config.js` e o arquivo de currículo do usuário
 > estão no `.gitignore` — permanecem só na sua máquina e nunca são enviados ao Git.
 
 ---
@@ -222,7 +221,7 @@ Repositório público: **https://github.com/tonnyrox/vagas-match**
 3. Recarregue a extensão ao editar `content.js`/`config.js`.
 
 ### 10.2 Proteção de dados pessoais
-`config.js` (seu perfil real) e `curriculo-preferencias-antonio-gomes.md` estão
+`config.js` (seu perfil real) e o arquivo de currículo estão
 no `.gitignore`. Para compartilhar o projeto sem vazar dados, envie apenas:
 `manifest.json`, `content.js`, `content.css`, `background.js`, `popup.*`,
 `options.*`, `config.example.js`, `README.md`, `LICENSE`.

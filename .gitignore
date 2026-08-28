@@ -1,7 +1,7 @@
 # Arquivos pessoais / sensíveis — NUNCA serem commitados ou compartilhados.
 # Mantêm o funcionamento local da extensão, mas não devem sair da máquina.
 config.js
-curriculo-preferencias-antonio-gomes.md
+curriculo-*.md
 
 # Ambiente virtual e ferramentas locais
 .venv/
