@@ -167,22 +167,6 @@ Recarregue a extensão (`chrome://extensions/` 🔄) para ativar.
 
 ---
 
-## 7. Launcher (abrir navegador via zendriver)
-
-`abrir_navegador.py` abre o Chrome do zendriver (perfil global + Profile 1, onde a
-extensão já está carregada) e navega para a URL.
-
-```bat
-python abrir_navegador.py                       # abre a agregadora (URL padrão)
-python abrir_navegador.py https://br.indeed.com # abre URL específica
-python abrir_navegador.py --check               # só verifica perfil/extensão
-```
-
-- Usa `zen_core` (zendriver, sem servidor/porta fixa).
-- Não recarrega a extensão — apenas abre o navegador onde ela já está ativa.
-
----
-
 ## 8. Arquivos do Projeto
 
 ```
@@ -195,7 +179,6 @@ extensao_trabalho_google/
 ├── background.js            # service worker
 ├── popup.html / popup.js    # janela do ícone
 ├── options.html / options.js# página de configurações
-├── abrir_navegador.py       # launcher (zendriver)
 ├── diagnostico_extensao.py  # script de verificação/depuração
 ├── LICENSE                  # MIT (veja seção 10)
 ├── .gitignore               # protege config.js e dados pessoais
@@ -242,5 +225,5 @@ Repositório público: **https://github.com/tonnyrox/vagas-match**
 `config.js` (seu perfil real) e `curriculo-preferencias-antonio-gomes.md` estão
 no `.gitignore`. Para compartilhar o projeto sem vazar dados, envie apenas:
 `manifest.json`, `content.js`, `content.css`, `background.js`, `popup.*`,
-`options.*`, `config.example.js`, `abrir_navegador.py`, `README.md`, `LICENSE`.
+`options.*`, `config.example.js`, `README.md`, `LICENSE`.
 O `config.js` real fica só na sua máquina.
