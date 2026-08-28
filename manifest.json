@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "Vagas Match - Tempo Real",
+  "version": "1.7.7",
+  "description": "Mostra em tempo real o match entre seu CV e vagas de emprego",
+  "permissions": ["activeTab", "storage"],
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.linkedin.com/jobs*",
+        "*://*.linkedin.com/job/*",
+        "*://*.indeed.com/*",
+        "*://*.jobbol.com/*"
+      ],
+      "js": ["config.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
+
+
+

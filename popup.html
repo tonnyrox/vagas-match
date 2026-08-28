@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vagas Match</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 360px;
+      min-height: 200px;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #0f0f23;
+      color: #fff;
+    }
+
+    .popup-header {
+      background: linear-gradient(135deg, #0f3460, #16213e);
+      padding: 16px 20px;
+      border-bottom: 2px solid #e94560;
+    }
+
+    .popup-header h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #e94560;
+      margin-bottom: 4px;
+    }
+
+    .popup-header p {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .popup-body {
+      padding: 16px 20px;
+    }
+
+    .timer-display {
+      text-align: center;
+      padding: 20px;
+      background: rgba(0,212,170,0.1);
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+
+    .timer-display .time {
+      font-size: 42px;
+      font-weight: bold;
+      color: #00d4aa;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer-display .label {
+      font-size: 12px;
+      color: #888;
+      margin-top: 4px;
+    }
+
+    .job-info {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .job-info h3 {
+      font-size: 15px;
+      color: #fff;
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .job-info .company {
+      font-size: 13px;
+      color: #00d4aa;
+      margin-bottom: 4px;
+    }
+
+    .job-info .location {
+      font-size: 12px;
+      color: #888;
+    }
+
+    .match-section {
+      margin-bottom: 16px;
+    }
+
+    .match-bar {
+      height: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+
+    .match-bar .fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.5s ease;
+    }
+
+    .match-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    .match-label .score {
+      font-weight: bold;
+    }
+
+    .details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .detail-item .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .dot.ok { background: #00d4aa; }
+    .dot.warn { background: #ffc107; }
+    .dot.fail { background: #e94560; }
+
+    .empty-state {
+      text-align: center;
+      padding: 40px 20px;
+      color: #666;
+    }
+
+    .empty-state .icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+
+    .footer {
+      padding: 12px 20px;
+      text-align: center;
+      font-size: 11px;
+      color: #555;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .btn-reload {
+      width: 100%;
+      padding: 10px;
+      background: linear-gradient(135deg, #e94560, #c23152);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 12px;
+      transition: opacity 0.2s;
+    }
+
+    .btn-reload:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+  <div class="popup-header">
+    <h1>Vagas Match</h1>
+    <p>Análise em tempo real da vaga</p>
+  </div>
+
+  <div class="popup-body" id="popup-body">
+    <div class="empty-state" id="empty-state">
+      <div class="icon">🔍</div>
+      <p>Abra uma vaga no LinkedIn, Indeed ou Jobbol para ver a análise.</p>
+      <button class="btn-reload" id="btn-reload">Recarregar</button>
+    </div>
+
+    <div id="job-content" style="display:none;">
+      <div class="timer-display">
+        <div class="time" id="popup-timer">00:00</div>
+        <div class="label">Tempo na página</div>
+      </div>
+
+      <div class="job-info" id="job-info">
+        <h3 id="job-title">-</h3>
+        <div class="company" id="job-company">-</div>
+        <div class="location" id="job-location">-</div>
+      </div>
+
+      <div class="match-section">
+        <div class="match-label">
+          <span>Match Score</span>
+          <span class="score" id="popup-score">0%</span>
+        </div>
+        <div class="match-bar">
+          <div class="fill" id="popup-bar" style="width:0%;background:#e94560;"></div>
+        </div>
+      </div>
+
+      <div class="details-list" id="popup-details"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div style="display:flex;justify-content:space-between;align-items:center;">
+      <span>Vagas Match v1.1</span>
+      <button id="btn-options" style="background:none;border:none;color:#3b82f6;font-size:12px;font-weight:600;cursor:pointer;padding:4px 8px;">⚙ Configurações</button>
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Vagas Match - Configurações</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #14161f;
+      color: #eee;
+      min-height: 100vh;
+    }
+
+    .header {
+      background: #1b1d29;
+      padding: 24px 32px;
+      border-bottom: 1px solid #2a2d3d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header h1 {
+      font-size: 24px;
+      color: #7aa2f7;
+    }
+
+    .header p {
+      font-size: 13px;
+      color: #8a8fa3;
+      margin-top: 4px;
+    }
+
+    .btn-save {
+      padding: 12px 28px;
+      background: #5b7fd1;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-save:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(91,127,209,0.4);
+    }
+
+    .btn-save:active { transform: scale(0.98); }
+
+    .saved-msg {
+      display: none;
+      padding: 8px 16px;
+      background: #5b7fd1;
+      color: #fff;
+      border-radius: 6px;
+      font-weight: 600;
+      animation: fadeInOut 2s forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; }
+      20% { opacity: 1; }
+      80% { opacity: 1; }
+      100% { opacity: 0; }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 32px;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #cdd3ea;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #2a2d3d;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title .icon { font-size: 20px; }
+
+    .toggle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 10px;
+    }
+
+    .toggle-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+      user-select: none;
+    }
+
+    .toggle-item:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.15);
+    }
+
+    .toggle-item.on {
+      background: rgba(91,127,209,0.14);
+      border-color: rgba(91,127,209,0.4);
+    }
+
+    .toggle-item.off {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.08);
+      opacity: 0.55;
+    }
+
+    .toggle-switch {
+      width: 42px;
+      height: 24px;
+      background: #40445a;
+      border-radius: 12px;
+      position: relative;
+      transition: background 0.3s;
+      flex-shrink: 0;
+    }
+
+    .toggle-item.on .toggle-switch {
+      background: #5b7fd1;
+    }
+
+    .toggle-item.off .toggle-switch {
+      background: #40445a;
+    }
+
+    .toggle-switch::after {
+      content: '';
+      width: 18px;
+      height: 18px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      transition: transform 0.3s;
+    }
+
+    .toggle-item.on .toggle-switch::after {
+      transform: translateX(18px);
+    }
+
+    .toggle-label {
+      font-size: 14px;
+      color: #ccc;
+      flex: 1;
+    }
+
+    .toggle-item.on .toggle-label { color: #cdd8f7; }
+    .toggle-item.off .toggle-label { color: #9096ab; }
+
+    .toggle-remove {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      color: #9096ab;
+      border: none;
+      font-size: 13px;
+      line-height: 20px;
+      text-align: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .toggle-remove:hover {
+      background: #5b7fd1;
+      color: #fff;
+    }
+
+    .add-item-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .add-item-row input {
+      flex: 1;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 13px;
+      font-family: inherit;
+    }
+
+    .add-item-row input:focus {
+      outline: none;
+      border-color: #5b7fd1;
+    }
+
+    .btn-add {
+      padding: 10px 18px;
+      background: rgba(91,127,209,0.18);
+      border: 1px solid rgba(91,127,209,0.4);
+      border-radius: 8px;
+      color: #cdd8f7;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-add:hover {
+      background: rgba(91,127,209,0.3);
+    }
+
+    .text-input-section {
+      margin-top: 16px;
+    }
+
+    .text-input-section label {
+      display: block;
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+
+    .text-input-section input,
+    .text-input-section textarea {
+      width: 100%;
+      padding: 10px 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+      font-family: inherit;
+    }
+
+    .text-input-section input:focus,
+    .text-input-section textarea:focus {
+      outline: none;
+      border-color: #00d4aa;
+    }
+
+    .text-input-section textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+
+    .helper {
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    .stats-bar {
+      display: flex;
+      gap: 24px;
+      padding: 16px 20px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      margin-bottom: 24px;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat .num {
+      font-size: 28px;
+      font-weight: bold;
+      color: #7aa2f7;
+    }
+
+    .stat .label {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+    }
+
+    .btn-reset {
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      color: #9096ab;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-reset:hover {
+      background: rgba(255,255,255,0.1);
+      color: #cdd3ea;
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>Vagas Match - Configurações</h1>
+    <p>Marque o que você quer e o que não quer nas vagas</p>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <div class="saved-msg" id="saved-msg">✓ Salvo!</div>
+    <button class="btn-save" id="btn-save">Salvar</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="stats-bar">
+    <div class="stat"><div class="num" id="stat-on">0</div><div class="label">Ativos</div></div>
+    <div class="stat"><div class="num" id="stat-off">0</div><div class="label">Desligados</div></div>
+    <div class="stat"><div class="num" id="stat-total">0</div><div class="label">Total</div></div>
+  </div>
+
+  <!-- AREAS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🎯</span> Áreas Pretendidas</div>
+    <div class="toggle-grid" id="grid-areas"></div>
+  </div>
+
+  <!-- CARGOS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">💼</span> Cargos de Foco</div>
+    <div class="toggle-grid" id="grid-cargos"></div>
+  </div>
+
+  <!-- SETORES PREFERIDOS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">✅</span> Setores Preferidos</div>
+    <div class="toggle-grid" id="grid-setores-pref"></div>
+  </div>
+
+  <!-- SETORES EVITADOS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🚫</span> Setores Evitados</div>
+    <div class="toggle-grid" id="grid-setores-evit"></div>
+  </div>
+
+  <!-- COMPETENCIAS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🛠️</span> Competências / Skills</div>
+    <div class="toggle-grid" id="grid-competencias"></div>
+  </div>
+
+  <!-- CIDADES -->
+  <div class="section">
+    <div class="section-title"><span class="icon">📍</span> Cidades</div>
+    <div class="toggle-grid" id="grid-cidades"></div>
+  </div>
+
+  <!-- EMPRESAS BLOQUEADAS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">⛔</span> Empresas Bloqueadas</div>
+    <div class="toggle-grid" id="grid-empresas"></div>
+  </div>
+
+  <!-- BAIRROS BLOQUEADOS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🏠</span> Bairros Bloqueados</div>
+    <div class="toggle-grid" id="grid-bairros"></div>
+  </div>
+
+  <!-- REGRAS GERAIS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">⚙️</span> Regras Gerais</div>
+    <div class="toggle-grid" id="grid-regras"></div>
+
+    <div class="text-input-section">
+      <label>Salário Mínimo (R$)</label>
+      <input type="number" id="input-salario" value="2600" min="0" step="100">
+      <div class="helper">Vagas abaixo disso serão marcadas como ruim (a menos que tenha comissão/bônus)</div>
+    </div>
+
+    <div class="text-input-section" style="margin-top:12px;">
+      <label>Dias Máximos da Vaga</label>
+      <input type="number" id="input-dias" value="7" min="1" max="30">
+      <div class="helper">Vagas mais antigas que isso serão descartadas</div>
+    </div>
+  </div>
+
+  <!-- REMUNERAÇÃO EXTRA -->
+  <div class="section">
+    <div class="section-title"><span class="icon">💰</span> Remuneração Extra (atrai mais)</div>
+    <p style="font-size:13px;color:#888;margin-bottom:12px;">Se a vaga tiver esses itens, o score sobe mesmo com salário abaixo do mínimo</p>
+    <div class="toggle-grid" id="grid-remuneracao"></div>
+  </div>
+
+  <!-- BENEFÍCIOS -->
+  <div class="section">
+    <div class="section-title"><span class="icon">🎁</span> Benefícios (atrai mais)</div>
+    <p style="font-size:13px;color:#888;margin-bottom:12px;">Benefícios que valorizam a vaga na análise</p>
+    <div class="toggle-grid" id="grid-beneficios"></div>
+  </div>
+
+  <div style="text-align:center;padding:20px;">
+    <button class="btn-reset" id="btn-reset">Restaurar Padrões</button>
+  </div>
+
+</div>
+
+<script src="config.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

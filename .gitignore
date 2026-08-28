@@ -1,0 +1,19 @@
+# Arquivos pessoais / sensíveis — NUNCA serem commitados ou compartilhados.
+# Mantêm o funcionamento local da extensão, mas não devem sair da máquina.
+config.js
+curriculo-preferencias-antonio-gomes.md
+
+# Ambiente virtual e ferramentas locais
+.venv/
+
+# Logs e arquivos de diagnóstico temporários
+diag_log.txt
+gh_out.txt
+auth_device.py
+
+# Backups antigos
+V1.zip
+V2.zip
+V3.zip
+
+gh_err.txt

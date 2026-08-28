@@ -1,0 +1,229 @@
+#vagas-match-badge {
+  position: fixed !important;
+  bottom: 20px !important;
+  left: auto !important;
+  right: 20px !important;
+  width: 320px;
+  background: #1a1a2e;
+  border: 2px solid #16213e;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  z-index: 2147483647 !important;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  color: #fff;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.badge-header {
+  background: linear-gradient(135deg, #0f3460, #16213e);
+  padding: 12px 16px;
+  border-bottom: 1px solid #1a1a4e;
+}
+
+.badge-header h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #e94560;
+}
+
+.badge-content {
+  padding: 16px;
+}
+
+.match-score {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.match-score .score-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+  font-size: 28px;
+  font-weight: bold;
+  position: relative;
+}
+
+.match-score .score-circle::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  padding: 3px;
+  background: conic-gradient(var(--score-color) var(--score-pct), transparent var(--score-pct));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.match-score .label {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.match-details {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.match-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+.match-item .icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+
+.match-item .icon.ok {
+  background: rgba(0, 212, 170, 0.2);
+  color: #00d4aa;
+}
+
+.match-item .icon.warn {
+  background: rgba(255, 193, 7, 0.2);
+  color: #ffc107;
+}
+
+.match-item .icon.fail {
+  background: rgba(233, 69, 96, 0.2);
+  color: #e94560;
+}
+
+.match-item .text {
+  flex: 1;
+  color: #ccc;
+}
+
+.match-item .text strong {
+  color: #fff;
+}
+
+.status-bar {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.status-bar .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00d4aa;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Mini badges para cards na página de busca */
+.vm-mini-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+  z-index: 999;
+  pointer-events: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  animation: vmFadeIn 0.3s ease;
+}
+
+@keyframes vmFadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Selinhos (chips) de benefícios, remuneração extra e modalidade */
+.chips-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.vm-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
+
+.vm-chip-ok {
+  background: rgba(0, 212, 170, 0.18);
+  border: 1px solid rgba(0, 212, 170, 0.4);
+  color: #00d4aa;
+}
+
+.vm-chip-extra {
+  background: rgba(59, 130, 246, 0.18);
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  color: #6ea8fe;
+}
+
+.vm-chip-warn {
+  background: rgba(255, 193, 7, 0.18);
+  border: 1px solid rgba(255, 193, 7, 0.4);
+  color: #ffc107;
+}
+
+.vm-chip-fail {
+  background: rgba(233, 69, 96, 0.18);
+  border: 1px solid rgba(233, 69, 96, 0.4);
+  color: #e94560;
+}
+
+.chips-label {
+  font-size: 10px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 10px;
+  margin-bottom: 2px;
+}
+
+/* Estilo do badge principal quando na página de busca */
+#vagas-match-badge .search-info {
+  font-size: 11px;
+  color: #888;
+  padding: 8px 12px;
+  background: rgba(0,0,0,0.2);
+  border-radius: 6px;
+  margin-top: 8px;
+  text-align: center;
+}
