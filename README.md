@@ -206,7 +206,7 @@ O projeto é **MIT** (arquivo `LICENSE`): qualquer pessoa pode usar, copiar,
 modificar e distribuir — inclusive mexer no código. Basta manter o aviso de
 copyright.
 
-Repositório público: **https://github.com/tonnyrox/vagas-match**
+Repositório (privado): **https://github.com/tonnyrox/vagas-match**
 (contém só arquivos seguros; `config.js` e dados pessoais ficam de fora via `.gitignore`).
 
 > Plataformas: hoje os seletores de extração funcionam no **LinkedIn** (agregadora
