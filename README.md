@@ -219,10 +219,24 @@ extensao_trabalho_google/
 
 ## 10. Licença MIT e Ambiente Virtual (GitHub CLI local)
 
-### 10.1 Licença
-O projeto é **MIT** (arquivo `LICENSE`): qualquer pessoa com acesso pode usar,
-copiar, modificar e distribuir — inclusive mexer no código. Basta manter o
-aviso de copyright.
+### 10.1 Licença e repositório público
+O projeto é **MIT** (arquivo `LICENSE`): qualquer pessoa pode usar, copiar,
+modificar e distribuir — inclusive mexer no código. Basta manter o aviso de
+copyright.
+
+Repositório público: **https://github.com/tonnyrox/vagas-match**
+(contém só arquivos seguros; `config.js` e dados pessoais ficam de fora via `.gitignore`).
+
+> Plataformas: hoje os seletores de extração funcionam no **LinkedIn** (agregadora
+> e, via `config.js`, qualquer vaga), e o `manifest.json` já inclui matches para
+> **Indeed** e **Jobbol**. A lógica em `content.js` (branch por site em
+> `extractJobData`) pode ser estendida para outras plataformas.
+
+**Como instalar (terceiros):**
+1. Clone o repo e carregue a pasta em `chrome://extensions/` (Modo do desenvolvedor).
+2. Copie `config.example.js` → `config.js` e preencha **seus** dados (o `config.js`
+   real não vai no repo, por privacidade).
+3. Recarregue a extensão ao editar `content.js`/`config.js`.
 
 ### 10.2 Ambiente virtual + `gh` (sem instalar nada no sistema)
 Tudo fica local, na pasta do projeto:
